@@ -38,6 +38,10 @@ export class AwsLambdaSidHubStack extends cdk.Stack {
     const api = new apigateway.LambdaRestApi(this, "SidHubAPI", {
       handler: lambdaFunc,
       proxy: false,
+      defaultCorsPreflightOptions: {
+        allowOrigins: apigateway.Cors.ALL_ORIGINS, //['https://sidhub.net', apigateway.Cors.ALL_ORIGINS],
+        allowMethods: ['POST']
+      },
     });
 
     // Creates reosource /Projects
